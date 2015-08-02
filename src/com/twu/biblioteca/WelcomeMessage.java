@@ -7,8 +7,9 @@ public class WelcomeMessage {
     public WelcomeMessage() {}
 
     public String get() {
-        String message = "Welcome" + newLine;
-        message = message + "Biblioteca is ready" + newLine;
-        return message;
+        StringBuilder message = new StringBuilder();
+        message.append("Welcome" + newLine);
+        message.append("Biblioteca is ready" + newLine);
+        return message.toString();
     }
 }
