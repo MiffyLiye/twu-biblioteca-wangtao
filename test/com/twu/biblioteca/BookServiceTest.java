@@ -38,4 +38,9 @@ public class BookServiceTest {
                 + "Published in 2015\r\n";
         assertEquals(details, bookService.getBookDetailsById(1));
     }
+
+    @Test
+    public void should_show_book_not_found_if_cannot_find_book_by_id() {
+        assertEquals("Book not found.\r\n", bookService.getBookDetailsById(0));
+    }
 }

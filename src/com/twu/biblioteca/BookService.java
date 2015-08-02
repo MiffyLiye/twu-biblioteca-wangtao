@@ -34,14 +34,19 @@ public class BookService {
     }
 
     public String getBookDetailsById(Integer id) {
+        boolean isFound = false;
         StringBuilder message = new StringBuilder();
         for (Book book : books) {
             if (book.getId() == id) {
+                isFound = true;
                 message.append("ID: " + book.getId().toString() + "\r\n"
                     + "Title: " + book.getTitle() + "\r\n"
                     + "Author: " + book.getAuthor() + "\r\n"
                     + "Published in " + book.getYearPublished().toString() + "\r\n");
             }
+        }
+        if (!isFound) {
+            message.append("Book not found.\r\n");
         }
         return message.toString();
     }

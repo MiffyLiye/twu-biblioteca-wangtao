@@ -72,13 +72,16 @@ public class Driver {
                             id = Integer.parseInt(cmd);
                         }
                         catch (NumberFormatException ex) {
-
+                            System.out.print("Select a valid option!\r\n");
                         }
                         if (id != null) {
                             System.out.print(bookDetailsPage(id));
                         }
                     }
                 }
+            }
+            else {
+                System.out.print("Select a valid option!\r\n");
             }
         }
     }
