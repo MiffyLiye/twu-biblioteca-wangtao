@@ -20,10 +20,13 @@ public class BookServiceTest {
         NewLine = System.getProperty("line.separator");
 
         bookService = new BookService();
-        List<Book> books = new LinkedList<Book>();
-        books.add(new Book(1, "The Story of Tao Part One", "Wang Tao", 2015));
-        books.add(new Book(2, "The Story of Tao Part Two", "Wang Tao", 2015));
-        bookService.setAvailableBooks(books);
+        List<Book> available_books = new LinkedList<Book>();
+        available_books.add(new Book(1, "The Story of Tao Part One", "Wang Tao", 2015));
+        available_books.add(new Book(2, "The Story of Tao Part Two", "Wang Tao", 2015));
+        bookService.setAvailableBooks(available_books);
+        List<Book> checkouted_books = new LinkedList<Book>();
+        checkouted_books.add(new Book(3, "The Story of Tao Part Three", "Wang Tao", 2015));
+        bookService.setCheckoutedBooks(checkouted_books);
     }
 
     @Test
