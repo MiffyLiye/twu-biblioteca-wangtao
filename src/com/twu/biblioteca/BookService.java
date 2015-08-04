@@ -6,10 +6,12 @@ import java.util.*;
  * Created by MiffyLiye on 02/08/2015.
  */
 public class BookService {
+    private String NewLine;
     private List<Book> available_books;
     private List<Book> checkouted_books;
 
     public BookService() {
+        NewLine = System.getProperty("line.separator");
         available_books = new LinkedList<Book>();
         available_books.add(new Book(1, "The Story of Tao Part One", "Wang Tao", 2015));
         available_books.add(new Book(2, "The Story of Tao Part Two", "Wang Tao", 2015));
@@ -36,7 +38,7 @@ public class BookService {
     public String getSummaryList() {
         StringBuilder message = new StringBuilder();
         for (Book book : available_books) {
-            message.append("ID: " + book.getId().toString() + "\t" + "Title: " + book.getTitle() + "\r\n");
+            message.append("ID: " + book.getId().toString() + "\t" + "Title: " + book.getTitle() + NewLine);
         }
         return message.toString();
     }
@@ -46,12 +48,12 @@ public class BookService {
         Book book = findBookById(id);
         if (book != null) {
             message.append("ID: " + book.getId().toString()
-                    + "\r\n" + "Title: " + book.getTitle() + "\r\n"
-                    + "Author: " + book.getAuthor() + "\r\n"
-                    + "Published in " + book.getYearPublished().toString() + "\r\n");
+                    + NewLine + "Title: " + book.getTitle() + NewLine
+                    + "Author: " + book.getAuthor() + NewLine
+                    + "Published in " + book.getYearPublished().toString() + NewLine);
         }
         else {
-            message.append("Book not found.\r\n");
+            message.append("Book not found." + NewLine);
         }
         return message.toString();
     }

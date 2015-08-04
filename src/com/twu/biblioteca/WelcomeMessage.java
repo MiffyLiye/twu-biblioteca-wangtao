@@ -2,14 +2,16 @@ package com.twu.biblioteca;
 
 
 public class WelcomeMessage {
-    private String newLine = "\r\n";
+    private String NewLine;
 
-    public WelcomeMessage() {}
+    public WelcomeMessage() {
+        NewLine = System.getProperty("line.separator");
+    }
 
     public String get() {
         StringBuilder message = new StringBuilder();
-        message.append("Welcome" + newLine);
-        message.append("Biblioteca is ready" + newLine);
+        message.append("Welcome" + NewLine);
+        message.append("Biblioteca is ready" + NewLine);
         return message.toString();
     }
 }

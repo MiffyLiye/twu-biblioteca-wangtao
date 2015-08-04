@@ -8,6 +8,7 @@ public class Driver {
     public Driver(WelcomeMessage welcomeMessage, BookService bookService) {
         this(welcomeMessage);
         this.bookService = bookService;
+        NewLine = System.getProperty("line.separator");
     }
 
     public Scanner getScanner() {
@@ -42,6 +43,7 @@ public class Driver {
     private WelcomeMessage welcomeMessage;
     private BookService bookService;
     private Scanner scanner;
+    private String NewLine;
 
     private List<String> path;
     private Integer book_details_id;
@@ -58,7 +60,7 @@ public class Driver {
 
     private void welcomeView() {
         System.out.print(welcomeMessage.get());
-        System.out.print("Press Q to quit. Press 1 to list books. Press 2 to checkout books. Press 3 to return books.\r\n");
+        System.out.print("Press Q to quit. Press 1 to list books. Press 2 to checkout books. Press 3 to return books." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();
             if (cmd.toLowerCase().equals("q")) {
@@ -78,7 +80,7 @@ public class Driver {
                 break;
             }
             else {
-                System.out.print("Select a valid option!\r\n");
+                System.out.print("Select a valid option!" + NewLine);
             }
         }
 
@@ -95,7 +97,7 @@ public class Driver {
 
     private void booksListView() {
         System.out.print(bookService.getSummaryList());
-        System.out.print("Press B to go back. Input book ID to see details.\r\n");
+        System.out.print("Press B to go back. Input book ID to see details." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();
             if (cmd.toLowerCase().equals("b")) {
@@ -109,7 +111,7 @@ public class Driver {
                     break;
                 }
                 catch (NumberFormatException ex) {
-                    System.out.print("Select a valid option!\r\n");
+                    System.out.print("Select a valid option!" + NewLine);
                 }
             }
         }
@@ -117,7 +119,7 @@ public class Driver {
 
     private void bookDetailsView() {
         System.out.print(bookService.getBookDetailsById(book_details_id));
-        System.out.print("Press B to go back.\r\n");
+        System.out.print("Press B to go back." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();
             if (cmd.toLowerCase().equals("b")) {
@@ -125,7 +127,7 @@ public class Driver {
                 break;
             }
             else {
-                System.out.print("Select a valid option!\r\n");
+                System.out.print("Select a valid option!" + NewLine);
             }
         }
     }
@@ -143,8 +145,8 @@ public class Driver {
     }
 
     private void bookCheckoutView() {
-        System.out.print("Checkout Books\r\n");
-        System.out.print("Press B to go back. Input the book ID to checkout.\r\n");
+        System.out.print("Checkout Books" + NewLine);
+        System.out.print("Press B to go back. Input the book ID to checkout." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();
             if (cmd.toLowerCase().equals("b")) {
@@ -163,15 +165,15 @@ public class Driver {
                     break;
                 }
                 catch (NumberFormatException ex) {
-                    System.out.print("Select a valid option!\r\n");
+                    System.out.print("Select a valid option!" + NewLine);
                 }
             }
         }
     }
 
     private void bookCheckoutSuccessfulView() {
-        System.out.print("Thank you! Enjoy the book.\r\n");
-        System.out.print("Press B to go back.\r\n");
+        System.out.print("Thank you! Enjoy the book." + NewLine);
+        System.out.print("Press B to go back." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();
             if (cmd.toLowerCase().equals("b")) {
@@ -179,14 +181,14 @@ public class Driver {
                 break;
             }
             else {
-                System.out.print("Select a valid option!\r\n");
+                System.out.print("Select a valid option!" + NewLine);
             }
         }
     }
 
     private void bookCheckoutUnsuccessfulView() {
-        System.out.print("That book is not available.\r\n");
-        System.out.print("Press B to go back.\r\n");
+        System.out.print("That book is not available." + NewLine);
+        System.out.print("Press B to go back." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();
             if (cmd.toLowerCase().equals("b")) {
@@ -194,7 +196,7 @@ public class Driver {
                 break;
             }
             else {
-                System.out.print("Select a valid option!\r\n");
+                System.out.print("Select a valid option!" + NewLine);
             }
         }
     }
@@ -212,8 +214,8 @@ public class Driver {
     }
 
     private void bookReturnView() {
-        System.out.print("Return Books\r\n");
-        System.out.print("Press B to go back. Input the book ID to return.\r\n");
+        System.out.print("Return Books" + NewLine);
+        System.out.print("Press B to go back. Input the book ID to return." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();
             if (cmd.toLowerCase().equals("b")) {
@@ -232,15 +234,15 @@ public class Driver {
                     break;
                 }
                 catch (NumberFormatException ex) {
-                    System.out.print("Select a valid option!\r\n");
+                    System.out.print("Select a valid option!" + NewLine);
                 }
             }
         }
     }
 
     private void bookReturnSuccessfulView() {
-        System.out.print("Thank you for returning the book.\r\n");
-        System.out.print("Press B to go back.\r\n");
+        System.out.print("Thank you for returning the book." + NewLine);
+        System.out.print("Press B to go back." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();
             if (cmd.toLowerCase().equals("b")) {
@@ -248,14 +250,14 @@ public class Driver {
                 break;
             }
             else {
-                System.out.print("Select a valid option!\r\n");
+                System.out.print("Select a valid option!" + NewLine);
             }
         }
     }
 
     private void bookReturnUnsuccessfulView() {
-        System.out.print("That is not a valid book to return.\r\n");
-        System.out.print("Press B to go back.\r\n");
+        System.out.print("That is not a valid book to return." + NewLine);
+        System.out.print("Press B to go back." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();
             if (cmd.toLowerCase().equals("b")) {
@@ -263,7 +265,7 @@ public class Driver {
                 break;
             }
             else {
-                System.out.print("Select a valid option!\r\n");
+                System.out.print("Select a valid option!" + NewLine);
             }
         }
     }
