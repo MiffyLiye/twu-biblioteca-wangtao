@@ -63,4 +63,21 @@ public class BookServiceTest {
 
         assertEquals(false, bookService.checkout(-1));
     }
+
+    @Test
+    public void should_successful_return_book_if_it_is_checkouted() {
+        bookService.checkout(1);
+        assertTrue(bookService.checkin(1));
+
+        String summaryList = "ID: 1\tTitle: The Story of Tao Part One\r\n"
+                + "ID: 2\tTitle: The Story of Tao Part Two\r\n";
+        assertEquals(summaryList, bookService.getSummaryList());
+    }
+
+    @Test
+    public void should_unsuccessful_return_book_if_it_is_not_checkouted() {
+        assertFalse(bookService.checkin(1));
+        assertFalse(bookService.checkin(-1));
+    }
+
 }

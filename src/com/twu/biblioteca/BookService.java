@@ -14,6 +14,7 @@ public class BookService {
         available_books.add(new Book(1, "The Story of Tao Part One", "Wang Tao", 2015));
         available_books.add(new Book(2, "The Story of Tao Part Two", "Wang Tao", 2015));
         checkouted_books = new LinkedList<Book>();
+        checkouted_books.add(new Book(3, "The Story of Tao Part Three", "Wang Tao", 2015));
     }
 
     public List<Book> getAvailableBooks() {
@@ -22,6 +23,14 @@ public class BookService {
 
     public void setAvailableBooks(List<Book> books) {
         this.available_books = books;
+    }
+
+    public List<Book> getCheckoutedBooks() {
+        return checkouted_books;
+    }
+
+    public void setCheckoutedBooks(List<Book> books) {
+        this.checkouted_books = books;
     }
 
     public String getSummaryList() {
@@ -65,7 +74,7 @@ public class BookService {
         return null;
     }
 
-    boolean checkout(Integer id) {
+    public boolean checkout(Integer id) {
         Book book = findBookById(id);
         if (book == null) {
             return false;
@@ -80,6 +89,19 @@ public class BookService {
             else {
                 return false;
             }
+        }
+    }
+
+    public boolean checkin(Integer id) {
+        Book book = findCheckoutedBookById(id);
+        if (book == null) {
+            return false;
+        }
+        else {
+            checkouted_books.remove(book);
+            available_books.add(book);
+            Collections.sort(available_books);
+            return true;
         }
     }
 }
