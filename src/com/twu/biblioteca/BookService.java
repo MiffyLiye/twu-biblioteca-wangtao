@@ -60,7 +60,7 @@ public class BookService {
 
     private Book findBookById(Integer id) {
         for (Book book : available_books) {
-            if (book.getId() == id) {
+            if (book.getId().equals(id)) {
                 return book;
             }
         }
@@ -69,7 +69,7 @@ public class BookService {
 
     private Book findCheckoutedBookById(Integer id) {
         for (Book book : checkouted_books) {
-            if (book.getId() == id) {
+            if (book.getId().equals(id)) {
                 return book;
             }
         }
