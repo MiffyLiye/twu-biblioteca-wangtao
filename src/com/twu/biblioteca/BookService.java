@@ -1,53 +1,85 @@
 package com.twu.biblioteca;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Created by MiffyLiye on 02/08/2015.
  */
 public class BookService {
-    private List<Book> books;
+    private List<Book> available_books;
+    private List<Book> checkouted_books;
 
     public BookService() {
-        books = new LinkedList<Book>();
-        books.add(new Book(1, "The Story of Tao Part One", "Wang Tao", 2015));
-        books.add(new Book(2, "The Story of Tao Part Two", "Wang Tao", 2015));
+        available_books = new LinkedList<Book>();
+        available_books.add(new Book(1, "The Story of Tao Part One", "Wang Tao", 2015));
+        available_books.add(new Book(2, "The Story of Tao Part Two", "Wang Tao", 2015));
+        checkouted_books = new LinkedList<Book>();
     }
 
-    public List<Book> getBooks() {
-        return books;
+    public List<Book> getAvailableBooks() {
+        return available_books;
     }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
+    public void setAvailableBooks(List<Book> books) {
+        this.available_books = books;
     }
 
     public String getSummaryList() {
         StringBuilder message = new StringBuilder();
-        for (Book book : books) {
+        for (Book book : available_books) {
             message.append("ID: " + book.getId().toString() + "\t" + "Title: " + book.getTitle() + "\r\n");
         }
         return message.toString();
     }
 
     public String getBookDetailsById(Integer id) {
-        boolean isFound = false;
         StringBuilder message = new StringBuilder();
-        for (Book book : books) {
-            if (book.getId() == id) {
-                isFound = true;
-                message.append("ID: " + book.getId().toString() + "\r\n"
-                    + "Title: " + book.getTitle() + "\r\n"
+        Book book = findBookById(id);
+        if (book != null) {
+            message.append("ID: " + book.getId().toString()
+                    + "\r\n" + "Title: " + book.getTitle() + "\r\n"
                     + "Author: " + book.getAuthor() + "\r\n"
                     + "Published in " + book.getYearPublished().toString() + "\r\n");
-            }
         }
-        if (!isFound) {
+        else {
             message.append("Book not found.\r\n");
         }
         return message.toString();
+    }
+
+    private Book findBookById(Integer id) {
+        for (Book book : available_books) {
+            if (book.getId() == id) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    private Book findCheckoutedBookById(Integer id) {
+        for (Book book : checkouted_books) {
+            if (book.getId() == id) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    boolean checkout(Integer id) {
+        Book book = findBookById(id);
+        if (book == null) {
+            return false;
+        }
+        else {
+            Book checkouted = findCheckoutedBookById(id);
+            if (checkouted == null) {
+                available_books.remove(book);
+                checkouted_books.add(book);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }
 }

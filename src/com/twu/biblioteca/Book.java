@@ -2,7 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.Date;
 
-public class Book {
+public class Book implements Comparable<Book> {
     private Integer id;
     private String title;
     private String author;
@@ -15,6 +15,10 @@ public class Book {
         this.title = title;
         this.author = author;
         this.yearPublished = yearPublished;
+    }
+
+    public int compareTo(Book book) {
+        return id - book.id;
     }
 
     public Integer getId() {

@@ -5,24 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Driver {
-    private boolean debug = false;
-    private WelcomeMessage welcomeMessage;
-    private BookService bookService;
-    private Scanner scanner;
-
-    private List<String> path;
-    private Integer book_details_id;
-
-    public Driver() {
-        path = new LinkedList<String>();
-        scanner = new Scanner(System.in);
-    }
-
-    public Driver(WelcomeMessage welcomeMessage) {
-        this();
-        this.welcomeMessage = welcomeMessage;
-    }
-
     public Driver(WelcomeMessage welcomeMessage, BookService bookService) {
         this(welcomeMessage);
         this.bookService = bookService;
@@ -35,7 +17,7 @@ public class Driver {
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
     }
-    
+
     public void run() {
         path.add("welcome");
         while (true) {
@@ -51,15 +33,37 @@ public class Driver {
             else if (path.size() > 1 && path.get(1).equals("list books")) {
                 BooksController();
             }
+            else if (path.size() > 1 && path.get(1).equals("checkout books")) {
+                BookCheckoutController();
+            }
             else if (path.size() == 0) {
                 break;
             }
         }
     }
 
+    private boolean debug = false;
+    private WelcomeMessage welcomeMessage;
+    private BookService bookService;
+    private Scanner scanner;
+
+    private List<String> path;
+    private Integer book_details_id;
+    private Integer book_checkout_id;
+
+    private Driver() {
+        path = new LinkedList<String>();
+        scanner = new Scanner(System.in);
+    }
+
+    private Driver(WelcomeMessage welcomeMessage) {
+        this();
+        this.welcomeMessage = welcomeMessage;
+    }
+
     private void welcomeView() {
         System.out.print(welcomeMessage.get());
-        System.out.print("Press Q to quit. Press 1 to list books.\r\n");
+        System.out.print("Press Q to quit. Press 1 to list books. Press 2 to checkout books.\r\n");
         while (true) {
             String cmd = scanner.nextLine();
             if (cmd.toLowerCase().equals("q")) {
@@ -68,6 +72,10 @@ public class Driver {
             }
             else if (cmd.toLowerCase().equals("1")) {
                 path.add("list books");
+                break;
+            }
+            else if (cmd.toLowerCase().equals("2")) {
+                path.add("checkout books");
                 break;
             }
             else {
@@ -110,6 +118,76 @@ public class Driver {
 
     private void bookDetailsView() {
         System.out.print(bookService.getBookDetailsById(book_details_id));
+        System.out.print("Press B to go back.\r\n");
+        while (true) {
+            String cmd = scanner.nextLine();
+            if (cmd.toLowerCase().equals("b")) {
+                path.remove(path.size() - 1);
+                break;
+            }
+            else {
+                System.out.print("Select a valid option!\r\n");
+            }
+        }
+    }
+
+    private void BookCheckoutController() {
+        if (path.size() == 2) {
+            bookCheckoutView();
+        }
+        else if (path.size() == 3 && path.get(2).equals("successful")) {
+            bookCheckoutSuccessfulView();
+        }
+        else if (path.size() == 3 && path.get(2).equals("unsuccessful")) {
+            bookCheckoutUnsuccessfulView();
+        }
+    }
+
+    private void bookCheckoutView() {
+        System.out.print("Checkout Books\r\n");
+        System.out.print("Press B to go back. Input the book ID to checkout.\r\n");
+        while (true) {
+            String cmd = scanner.nextLine();
+            if (cmd.toLowerCase().equals("b")) {
+                path.remove(path.size() - 1);
+                break;
+            }
+            else {
+                try {
+                    Integer id = Integer.parseInt(cmd);
+                    book_checkout_id = id;
+                    if (bookService.checkout(id)) {
+                        path.add("successful");
+                    }
+                    else {
+                        path.add("unsuccessful");
+                    }
+                    break;
+                }
+                catch (NumberFormatException ex) {
+                    System.out.print("Select a valid option!\r\n");
+                }
+            }
+        }
+    }
+
+    private void bookCheckoutSuccessfulView() {
+        System.out.print("Thank you! Enjoy the book.\r\n");
+        System.out.print("Press B to go back.\r\n");
+        while (true) {
+            String cmd = scanner.nextLine();
+            if (cmd.toLowerCase().equals("b")) {
+                path.remove(path.size() - 1);
+                break;
+            }
+            else {
+                System.out.print("Select a valid option!\r\n");
+            }
+        }
+    }
+
+    private void bookCheckoutUnsuccessfulView() {
+        System.out.print("That book is not available.\r\n");
         System.out.print("Press B to go back.\r\n");
         while (true) {
             String cmd = scanner.nextLine();
