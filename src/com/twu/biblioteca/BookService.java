@@ -45,7 +45,7 @@ public class BookService {
 
     public String getBookDetailsById(Integer id) {
         StringBuilder message = new StringBuilder();
-        Book book = findBookById(id);
+        Book book = findAvailableBookById(id);
         if (book != null) {
             message.append("ID: " + book.getId().toString()
                     + NewLine + "Title: " + book.getTitle() + NewLine
@@ -58,7 +58,7 @@ public class BookService {
         return message.toString();
     }
 
-    private Book findBookById(Integer id) {
+    private Book findAvailableBookById(Integer id) {
         for (Book book : available_books) {
             if (book.getId().equals(id)) {
                 return book;
@@ -77,7 +77,7 @@ public class BookService {
     }
 
     public boolean checkout(Integer id) {
-        Book book = findBookById(id);
+        Book book = findAvailableBookById(id);
         if (book == null) {
             return false;
         }
