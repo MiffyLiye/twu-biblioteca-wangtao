@@ -1,5 +1,8 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.service.BookService;
+import com.twu.biblioteca.service.MovieService;
+
 public class BibliotecaApp {
     private static WelcomeMessage welcomeMessage = new WelcomeMessage();
     private static BookService bookService = new BookService();

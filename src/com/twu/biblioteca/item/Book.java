@@ -1,8 +1,6 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.item;
 
-import java.util.Date;
-
-public class Book implements Comparable<Book> {
+public class Book implements Comparable<Book>, IHaveID {
     private Integer id;
     private String title;
     private String author;
@@ -17,14 +15,17 @@ public class Book implements Comparable<Book> {
         this.yearPublished = yearPublished;
     }
 
+    @Override
     public int compareTo(Book book) {
         return id - book.id;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }

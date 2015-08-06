@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.item.Movie;
+import com.twu.biblioteca.service.MovieService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,25 +25,25 @@ public class MovieServiceTest {
         List<Movie> available_movies = new LinkedList<Movie>();
         available_movies.add(new Movie(1, "The Story of Tao Part One", 2015, "Wang Tao", 10));
         available_movies.add(new Movie(2, "The Story of Tao Part Two", 2015, "Wang Tao", null));
-        movieService.setAvailableMovies(available_movies);
+        movieService.setAvailableItems(available_movies);
         List<Movie> checkouted_movies = new LinkedList<Movie>();
         checkouted_movies.add(new Movie(3, "The Story of Tao Part Three", 2015, "Wang Tao", null));
-        movieService.setCheckoutedMovies(checkouted_movies);
+        movieService.setCheckoutedItems(checkouted_movies);
     }
 
     @Test
     public void should_get_all_available_movies() throws Exception {
-        assertEquals(2, movieService.getAvailableMovies().size());
+        assertEquals(2, movieService.getAvailableItems().size());
     }
 
     @Test
     public void should_find_available_movie_by_id() {
-        assertNotNull(movieService.findAvailableMovieById(1));
+        assertNotNull(movieService.findAvailableItemById(1));
     }
 
     @Test
     public void should_not_found_if_cannot_find_movie_by_id() {
-        assertNull(movieService.findAvailableMovieById(0));
+        assertNull(movieService.findAvailableItemById(0));
     }
 
     @Test
@@ -54,7 +56,7 @@ public class MovieServiceTest {
     public void should_not_list_checkouted_movie_on_movies_list() {
         movieService.checkout(1);
 
-        assertEquals(1, movieService.getAvailableMovies().size());
+        assertEquals(1, movieService.getAvailableItems().size());
     }
 
     @Test
@@ -70,7 +72,7 @@ public class MovieServiceTest {
         movieService.checkout(1);
         assertTrue(movieService.checkin(1));
 
-        assertEquals(2, movieService.getAvailableMovies().size());
+        assertEquals(2, movieService.getAvailableItems().size());
     }
 
     @Test

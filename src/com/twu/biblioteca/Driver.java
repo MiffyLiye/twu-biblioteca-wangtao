@@ -1,5 +1,10 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.item.Book;
+import com.twu.biblioteca.item.Movie;
+import com.twu.biblioteca.service.BookService;
+import com.twu.biblioteca.service.MovieService;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -123,8 +128,7 @@ public class Driver {
     }
 
     private void booksListView() {
-        //System.out.print(bookService.getSummaryList());
-        List<Book> bookList = bookService.getAvailableBooks();
+        List<Book> bookList = bookService.getAvailableItems();
         Collections.sort(bookList);
         for (Book book : bookList) {
             System.out.print("ID: " + book.getId().toString() + "\t" + "Title: " + book.getTitle() + NewLine);
@@ -150,8 +154,7 @@ public class Driver {
     }
 
     private void bookDetailsView() {
-        //System.out.print(bookService.getBookDetailsById(book_details_id));
-        Book book = bookService.findAvailableBookById(book_details_id);
+        Book book = bookService.findAvailableItemById(book_details_id);
         System.out.print("ID: " + book.getId().toString()
                 + NewLine + "Title: " + book.getTitle() + NewLine
                 + "Author: " + book.getAuthor() + NewLine
@@ -317,8 +320,7 @@ public class Driver {
     }
 
     private void moviesListView() {
-        //System.out.print(movieService.getSummaryList());
-        List<Movie> movieList = movieService.getAvailableMovies();
+        List<Movie> movieList = movieService.getAvailableItems();
         Collections.sort(movieList);
         for (Movie movie : movieList) {
             System.out.print("ID: " + movie.getId().toString() + "\t"
@@ -346,8 +348,7 @@ public class Driver {
     }
 
     private void movieDetailsView() {
-        //System.out.print(movieService.getMovieDetailsById(movie_details_id));
-        Movie movie = movieService.findAvailableMovieById(movie_details_id);
+        Movie movie = movieService.findAvailableItemById(movie_details_id);
         System.out.print("ID: " + movie.getId().toString() + NewLine
                 + "Name: " + movie.getName() + NewLine
                 + "Year: " + movie.getYear().toString() + NewLine
