@@ -41,33 +41,7 @@ public class MovieService {
         this.checkouted_movies = movies;
     }
 
-    public String getSummaryList() {
-        StringBuilder message = new StringBuilder();
-        for (Movie movie : available_movies) {
-            message.append("ID: " + movie.getId().toString() + "\t"
-                    + "Name: " + movie.getName() + "\t"
-                    + "Year: " + movie.getYear().toString() + NewLine);
-        }
-        return message.toString();
-    }
-
-    public String getMovieDetailsById(Integer id) {
-        StringBuilder message = new StringBuilder();
-        Movie movie = findAvailableMovieById(id);
-        if (movie != null) {
-            message.append("ID: " + movie.getId().toString() + NewLine
-                    + "Name: " + movie.getName() + NewLine
-                    + "Year: " + movie.getYear().toString() + NewLine
-                    + "Director: " + movie.getDirector() + NewLine
-                    + "Rating: " + (movie.getRating() != null ? movie.getRating().toString() : "Unrated")  + NewLine);
-        }
-        else {
-            message.append("Movie not found." + NewLine);
-        }
-        return message.toString();
-    }
-
-    private Movie findAvailableMovieById(Integer id) {
+    public Movie findAvailableMovieById(Integer id) {
         for (Movie movie : available_movies) {
             if (movie.getId().equals(id)) {
                 return movie;

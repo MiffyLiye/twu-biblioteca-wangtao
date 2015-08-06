@@ -1,17 +1,14 @@
 package com.twu.biblioteca;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Driver {
-    public Driver(WelcomeMessage welcomeMessage, BookService bookService) {
+    public Driver(WelcomeMessage welcomeMessage, BookService bookService, MovieService movieService) {
         this(welcomeMessage);
         this.bookService = bookService;
-    }
-
-    public Driver(WelcomeMessage welcomeMessage, BookService bookService, MovieService movieService) {
-        this(welcomeMessage, bookService);
         this.movieService = movieService;
     }
 
@@ -33,7 +30,7 @@ public class Driver {
                 welcomeView();
             }
             else if (path.get(1).equals("list books")) {
-                BooksController();
+                BooksListController();
             }
             else if (path.get(1).equals("checkout books")) {
                 BooksCheckoutController();
@@ -42,7 +39,7 @@ public class Driver {
                 BooksReturnController();
             }
             else if (path.get(1).equals("list movies")) {
-                MoviesController();
+                MoviesListController();
             }
             else if (path.get(1).equals("checkout movies")) {
                 MoviesCheckoutController();
@@ -116,7 +113,7 @@ public class Driver {
 
     }
 
-    private void BooksController() {
+    private void BooksListController() {
         if (path.size() == 2) {
             booksListView();
         }
@@ -126,7 +123,12 @@ public class Driver {
     }
 
     private void booksListView() {
-        System.out.print(bookService.getSummaryList());
+        //System.out.print(bookService.getSummaryList());
+        List<Book> bookList = bookService.getAvailableBooks();
+        Collections.sort(bookList);
+        for (Book book : bookList) {
+            System.out.print("ID: " + book.getId().toString() + "\t" + "Title: " + book.getTitle() + NewLine);
+        }
         System.out.print("Press B to go back. Input book ID to see details." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();
@@ -148,7 +150,12 @@ public class Driver {
     }
 
     private void bookDetailsView() {
-        System.out.print(bookService.getBookDetailsById(book_details_id));
+        //System.out.print(bookService.getBookDetailsById(book_details_id));
+        Book book = bookService.findAvailableBookById(book_details_id);
+        System.out.print("ID: " + book.getId().toString()
+                + NewLine + "Title: " + book.getTitle() + NewLine
+                + "Author: " + book.getAuthor() + NewLine
+                + "Published in " + book.getYearPublished().toString() + NewLine);
         System.out.print("Press B to go back." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();
@@ -300,7 +307,7 @@ public class Driver {
         }
     }
 
-    private void MoviesController() {
+    private void MoviesListController() {
         if (path.size() == 2) {
             moviesListView();
         }
@@ -310,7 +317,14 @@ public class Driver {
     }
 
     private void moviesListView() {
-        System.out.print(movieService.getSummaryList());
+        //System.out.print(movieService.getSummaryList());
+        List<Movie> movieList = movieService.getAvailableMovies();
+        Collections.sort(movieList);
+        for (Movie movie : movieList) {
+            System.out.print("ID: " + movie.getId().toString() + "\t"
+                    + "Name: " + movie.getName() + "\t"
+                    + "Year: " + movie.getYear().toString() + NewLine);
+        }
         System.out.print("Press B to go back. Input movie ID to see details." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();
@@ -332,7 +346,13 @@ public class Driver {
     }
 
     private void movieDetailsView() {
-        System.out.print(movieService.getMovieDetailsById(movie_details_id));
+        //System.out.print(movieService.getMovieDetailsById(movie_details_id));
+        Movie movie = movieService.findAvailableMovieById(movie_details_id);
+        System.out.print("ID: " + movie.getId().toString() + NewLine
+                + "Name: " + movie.getName() + NewLine
+                + "Year: " + movie.getYear().toString() + NewLine
+                + "Director: " + movie.getDirector() + NewLine
+                + "Rating: " + (movie.getRating() != null ? movie.getRating().toString() : "Unrated")  + NewLine);
         System.out.print("Press B to go back." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();

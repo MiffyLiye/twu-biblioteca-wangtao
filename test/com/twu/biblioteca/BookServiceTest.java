@@ -30,24 +30,18 @@ public class BookServiceTest {
     }
 
     @Test
-    public void should_list_all_books() throws Exception {
-        String summaryList = "ID: 1\tTitle: The Story of Tao Part One" + NewLine
-                + "ID: 2\tTitle: The Story of Tao Part Two" + NewLine;
-        assertEquals(summaryList, bookService.getSummaryList());
+    public void should_get_all_available_books() throws Exception {
+        assertEquals(2, bookService.getAvailableBooks().size());
     }
 
     @Test
-    public void should_list_book_details_by_id() {
-        String details = "ID: 1" + NewLine
-                + "Title: The Story of Tao Part One" + NewLine
-                + "Author: Wang Tao" + NewLine
-                + "Published in 2015" + NewLine;
-        assertEquals(details, bookService.getBookDetailsById(1));
+    public void should_get_available_book_by_id() {
+        assertNotNull(bookService.findAvailableBookById(1));
     }
 
     @Test
-    public void should_show_book_not_found_if_cannot_find_book_by_id() {
-        assertEquals("Book not found." + NewLine, bookService.getBookDetailsById(0));
+    public void should_not_found_if_cannot_find_book_by_id() {
+        assertNull(bookService.findAvailableBookById(0));
     }
 
     @Test
@@ -59,7 +53,7 @@ public class BookServiceTest {
     @Test
     public void should_not_list_checkouted_book_on_books_list() {
         bookService.checkout(1);
-        assertEquals("ID: 2\tTitle: The Story of Tao Part Two" + NewLine, bookService.getSummaryList());
+        assertEquals(1, bookService.getAvailableBooks().size());
     }
 
     @Test
@@ -75,9 +69,7 @@ public class BookServiceTest {
         bookService.checkout(1);
         assertTrue(bookService.checkin(1));
 
-        String summaryList = "ID: 1\tTitle: The Story of Tao Part One" + NewLine
-                + "ID: 2\tTitle: The Story of Tao Part Two" + NewLine;
-        assertEquals(summaryList, bookService.getSummaryList());
+        assertEquals(2, bookService.getAvailableBooks().size());
     }
 
     @Test

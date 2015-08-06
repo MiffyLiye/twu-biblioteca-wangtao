@@ -30,32 +30,18 @@ public class MovieServiceTest {
     }
 
     @Test
-    public void should_list_all_movies() throws Exception {
-        String summaryList = "ID: 1\tName: The Story of Tao Part One\tYear: 2015" + NewLine
-                + "ID: 2\tName: The Story of Tao Part Two\tYear: 2015" + NewLine;
-        assertEquals(summaryList, movieService.getSummaryList());
+    public void should_get_all_available_movies() throws Exception {
+        assertEquals(2, movieService.getAvailableMovies().size());
     }
 
     @Test
-    public void should_list_movie_details_by_id() {
-        String details = "ID: 1" + NewLine
-                + "Name: The Story of Tao Part One" + NewLine
-                + "Year: 2015" + NewLine
-                + "Director: Wang Tao" + NewLine
-                + "Rating: 10" + NewLine;
-        assertEquals(details, movieService.getMovieDetailsById(1));
-
-        details = "ID: 2" + NewLine
-                + "Name: The Story of Tao Part Two" + NewLine
-                + "Year: 2015" + NewLine
-                + "Director: Wang Tao" + NewLine
-                + "Rating: Unrated" + NewLine;
-        assertEquals(details, movieService.getMovieDetailsById(2));
+    public void should_find_available_movie_by_id() {
+        assertNotNull(movieService.findAvailableMovieById(1));
     }
 
     @Test
-    public void should_show_movie_not_found_if_cannot_find_movie_by_id() {
-        assertEquals("Movie not found." + NewLine, movieService.getMovieDetailsById(0));
+    public void should_not_found_if_cannot_find_movie_by_id() {
+        assertNull(movieService.findAvailableMovieById(0));
     }
 
     @Test
@@ -67,7 +53,8 @@ public class MovieServiceTest {
     @Test
     public void should_not_list_checkouted_movie_on_movies_list() {
         movieService.checkout(1);
-        assertEquals("ID: 2\tName: The Story of Tao Part Two\tYear: 2015" + NewLine, movieService.getSummaryList());
+
+        assertEquals(1, movieService.getAvailableMovies().size());
     }
 
     @Test
@@ -83,9 +70,7 @@ public class MovieServiceTest {
         movieService.checkout(1);
         assertTrue(movieService.checkin(1));
 
-        String summaryList = "ID: 1\tName: The Story of Tao Part One\tYear: 2015" + NewLine
-                + "ID: 2\tName: The Story of Tao Part Two\tYear: 2015" + NewLine;
-        assertEquals(summaryList, movieService.getSummaryList());
+        assertEquals(2, movieService.getAvailableMovies().size());
     }
 
     @Test

@@ -35,30 +35,7 @@ public class BookService {
         this.checkouted_books = books;
     }
 
-    public String getSummaryList() {
-        StringBuilder message = new StringBuilder();
-        for (Book book : available_books) {
-            message.append("ID: " + book.getId().toString() + "\t" + "Title: " + book.getTitle() + NewLine);
-        }
-        return message.toString();
-    }
-
-    public String getBookDetailsById(Integer id) {
-        StringBuilder message = new StringBuilder();
-        Book book = findAvailableBookById(id);
-        if (book != null) {
-            message.append("ID: " + book.getId().toString()
-                    + NewLine + "Title: " + book.getTitle() + NewLine
-                    + "Author: " + book.getAuthor() + NewLine
-                    + "Published in " + book.getYearPublished().toString() + NewLine);
-        }
-        else {
-            message.append("Book not found." + NewLine);
-        }
-        return message.toString();
-    }
-
-    private Book findAvailableBookById(Integer id) {
+    public Book findAvailableBookById(Integer id) {
         for (Book book : available_books) {
             if (book.getId().equals(id)) {
                 return book;
