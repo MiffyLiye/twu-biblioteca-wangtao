@@ -1,4 +1,4 @@
-package com.twu.biblioteca.item;
+package com.twu.biblioteca.entity;
 
 public class Movie implements Comparable<Movie>, IHaveID{
     private Integer id;
@@ -17,14 +17,17 @@ public class Movie implements Comparable<Movie>, IHaveID{
         this.rating = rating;
     }
 
+    @Override
     public int compareTo(Movie movie) {
         return id - movie.id;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }

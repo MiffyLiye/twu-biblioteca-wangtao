@@ -3,18 +3,7 @@ package com.twu.biblioteca.controller.book;
 import com.twu.biblioteca.controller.BaseController;
 import com.twu.biblioteca.service.BookService;
 
-import java.util.List;
-import java.util.Scanner;
-
 public class BooksCheckoutController extends BaseController {
-    private BookService bookService;
-
-    @Override
-    protected void init_requested_path() {
-        requested_path.add("welcome");
-        requested_path.add("checkout books");
-    }
-
     public BooksCheckoutController() {
         super();
     }
@@ -37,6 +26,13 @@ public class BooksCheckoutController extends BaseController {
         }
     }
 
+    private BookService bookService;
+
+    @Override
+    protected void initRequestedPath() {
+        requestedPath.add("welcome");
+        requestedPath.add("checkout books");
+    }
 
     private void bookCheckoutView() {
         System.out.print("Checkout Books" + NewLine);
@@ -50,7 +46,8 @@ public class BooksCheckoutController extends BaseController {
             else {
                 try {
                     Integer id = Integer.parseInt(cmd);
-                    if (bookService.checkout(id)) {
+                    String number = (String) session.get("user library number");
+                    if (number != null && bookService.checkout(id, number)) {
                         path.add("successful");
                     }
                     else {
@@ -81,7 +78,12 @@ public class BooksCheckoutController extends BaseController {
     }
 
     private void bookCheckoutUnsuccessfulView() {
-        System.out.print("That book is not available." + NewLine);
+        if (session.get("user library number") == null) {
+            System.out.print("Please login." + NewLine);
+        }
+        else {
+            System.out.print("That book is not available." + NewLine);
+        }
         System.out.print("Press B to go back." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();

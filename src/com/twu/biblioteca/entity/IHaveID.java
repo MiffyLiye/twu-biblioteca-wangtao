@@ -1,4 +1,4 @@
-package com.twu.biblioteca.item;
+package com.twu.biblioteca.entity;
 
 public interface IHaveID {
     public Integer getId();

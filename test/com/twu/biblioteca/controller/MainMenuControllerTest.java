@@ -23,7 +23,7 @@ public class MainMenuControllerTest {
         path.add("welcome");
         path.add("main menu");
         mainMenuController.setPath(path);
-        assertEquals(true, mainMenuController.matchPath());
+        assertEquals(true, mainMenuController.pathMatched());
     }
 
     @Test
@@ -31,6 +31,6 @@ public class MainMenuControllerTest {
         path.add("welcome");
         path.add("query books");
         mainMenuController.setPath(path);
-        assertEquals(false, mainMenuController.matchPath());
+        assertEquals(false, mainMenuController.pathMatched());
     }
 }

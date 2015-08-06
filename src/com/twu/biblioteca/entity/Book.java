@@ -1,4 +1,4 @@
-package com.twu.biblioteca.item;
+package com.twu.biblioteca.entity;
 
 public class Book implements Comparable<Book>, IHaveID {
     private Integer id;

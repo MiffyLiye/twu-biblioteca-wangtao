@@ -4,14 +4,6 @@ import com.twu.biblioteca.controller.BaseController;
 import com.twu.biblioteca.service.MovieService;
 
 public class MoviesCheckoutController extends BaseController {
-    private MovieService movieService;
-
-    @Override
-    protected void init_requested_path() {
-        requested_path.add("welcome");
-        requested_path.add("checkout movies");
-    }
-
     public MoviesCheckoutController() {
         super();
     }
@@ -34,6 +26,14 @@ public class MoviesCheckoutController extends BaseController {
         }
     }
 
+    private MovieService movieService;
+
+    @Override
+    protected void initRequestedPath() {
+        requestedPath.add("welcome");
+        requestedPath.add("checkout movies");
+    }
+
     private void movieCheckoutView() {
         System.out.print("Checkout Movies" + NewLine);
         System.out.print("Press B to go back. Input the movie ID to checkout." + NewLine);
@@ -46,7 +46,8 @@ public class MoviesCheckoutController extends BaseController {
             else {
                 try {
                     Integer id = Integer.parseInt(cmd);
-                    if (movieService.checkout(id)) {
+                    String number = (String) session.get("user library number");
+                    if (number != null && movieService.checkout(id, number)) {
                         path.add("successful");
                     }
                     else {
@@ -77,7 +78,12 @@ public class MoviesCheckoutController extends BaseController {
     }
 
     private void movieCheckoutUnsuccessfulView() {
-        System.out.print("That movie is not available." + NewLine);
+        if (session.get("user library number") == null) {
+            System.out.print("Please login." + NewLine);
+        }
+        else {
+            System.out.print("That movie is not available." + NewLine);
+        }
         System.out.print("Press B to go back." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();
@@ -90,6 +96,4 @@ public class MoviesCheckoutController extends BaseController {
             }
         }
     }
-
-
 }

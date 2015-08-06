@@ -1,7 +1,6 @@
 package com.twu.biblioteca.service;
 
-import com.twu.biblioteca.item.Movie;
-import com.twu.biblioteca.service.MovieService;
+import com.twu.biblioteca.entity.Movie;
 import org.junit.Before;
 import org.junit.Test;
 

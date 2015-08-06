@@ -24,7 +24,7 @@ public class BooksQueryControllerTest {
         path.add("welcome");
         path.add("query books");
         booksQueryController.setPath(path);
-        assertEquals(true, booksQueryController.matchPath());
+        assertEquals(true, booksQueryController.pathMatched());
     }
 
     @Test
@@ -33,13 +33,13 @@ public class BooksQueryControllerTest {
         path.add("query books");
         path.add("book details");
         booksQueryController.setPath(path);
-        assertEquals(true, booksQueryController.matchPath());
+        assertEquals(true, booksQueryController.pathMatched());
     }
 
     @Test
     public void should_not_match_welcome_checkout_books() {
         path.add("checkout books");
         booksQueryController.setPath(path);
-        assertEquals(false, booksQueryController.matchPath());
+        assertEquals(false, booksQueryController.pathMatched());
     }
 }

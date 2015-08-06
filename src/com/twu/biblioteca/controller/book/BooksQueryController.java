@@ -1,23 +1,13 @@
 package com.twu.biblioteca.controller.book;
 
 import com.twu.biblioteca.controller.BaseController;
-import com.twu.biblioteca.item.Book;
+import com.twu.biblioteca.entity.Book;
 import com.twu.biblioteca.service.BookService;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 
 public class BooksQueryController extends BaseController {
-    private BookService bookService;
-    private Integer book_details_id;
-
-    @Override
-    protected void init_requested_path() {
-        requested_path.add("welcome");
-        requested_path.add("query books");
-    }
-
     public BooksQueryController() {
         super();
     }
@@ -35,6 +25,15 @@ public class BooksQueryController extends BaseController {
         else if (path.size() >= 3 && path.get(2).equals("book details")) {
             bookDetailsView();
         }
+    }
+
+    private BookService bookService;
+    private Integer book_details_id;
+
+    @Override
+    protected void initRequestedPath() {
+        requestedPath.add("welcome");
+        requestedPath.add("query books");
     }
 
     private void booksListView() {

@@ -1,6 +1,7 @@
 package com.twu.biblioteca.service;
 
-import com.twu.biblioteca.item.Movie;
+import com.twu.biblioteca.controller.IHaveSession;
+import com.twu.biblioteca.entity.Movie;
 
 import java.util.List;
 

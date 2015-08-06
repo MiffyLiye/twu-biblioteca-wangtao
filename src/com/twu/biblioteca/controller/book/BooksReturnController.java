@@ -3,18 +3,7 @@ package com.twu.biblioteca.controller.book;
 import com.twu.biblioteca.controller.BaseController;
 import com.twu.biblioteca.service.BookService;
 
-import java.util.List;
-import java.util.Scanner;
-
 public class BooksReturnController extends BaseController {
-    private BookService bookService;
-
-    @Override
-    protected void init_requested_path() {
-        requested_path.add("welcome");
-        requested_path.add("return books");
-    }
-
     public BooksReturnController() {
         super();
     }
@@ -37,6 +26,13 @@ public class BooksReturnController extends BaseController {
         }
     }
 
+    private BookService bookService;
+
+    @Override
+    protected void initRequestedPath() {
+        requestedPath.add("welcome");
+        requestedPath.add("return books");
+    }
 
     private void bookReturnView() {
         System.out.print("Return Books" + NewLine);

@@ -1,22 +1,13 @@
 package com.twu.biblioteca.controller.movie;
 
 import com.twu.biblioteca.controller.BaseController;
-import com.twu.biblioteca.item.Movie;
+import com.twu.biblioteca.entity.Movie;
 import com.twu.biblioteca.service.MovieService;
 
 import java.util.Collections;
 import java.util.List;
 
 public class MoviesQueryController extends BaseController {
-    private MovieService movieService;
-    private Integer movie_details_id;
-
-    @Override
-    protected void init_requested_path() {
-        requested_path.add("welcome");
-        requested_path.add("query movies");
-    }
-
     public MoviesQueryController() {
         super();
     }
@@ -34,6 +25,15 @@ public class MoviesQueryController extends BaseController {
         else if (path.size() >= 3 && path.get(2).equals("movie details")) {
             movieDetailsView();
         }
+    }
+
+    private MovieService movieService;
+    private Integer movie_details_id;
+
+    @Override
+    protected void initRequestedPath() {
+        requestedPath.add("welcome");
+        requestedPath.add("query movies");
     }
 
     private void moviesListView() {
@@ -83,6 +83,4 @@ public class MoviesQueryController extends BaseController {
             }
         }
     }
-
-
 }

@@ -1,13 +1,6 @@
 package com.twu.biblioteca.controller;
 
 public class MainMenuController extends BaseController {
-
-    @Override
-    protected void init_requested_path() {
-        requested_path.add("welcome");
-        requested_path.add("main menu");
-    }
-
     public MainMenuController() {
         super();
     }
@@ -16,7 +9,8 @@ public class MainMenuController extends BaseController {
     public void runView() {
         System.out.print("Press Q to quit." + NewLine
                 + "Press 1 to list books. Press 2 to checkout books. Press 3 to return books." + NewLine
-                + "Press 4 to list movies. Press 5 to checkout movies. Press 6 to return movies." + NewLine);
+                + "Press 4 to list movies. Press 5 to checkout movies. Press 6 to return movies." + NewLine
+                + "Press 7 to go to user center." + NewLine);
         while (true) {
             String cmd = scanner.nextLine();
             if (cmd.toLowerCase().equals("q")) {
@@ -48,10 +42,19 @@ public class MainMenuController extends BaseController {
                 path.set(1, "return movies");
                 break;
             }
+            else if (cmd.toLowerCase().equals("7")) {
+                path.set(1, "user center");
+                break;
+            }
             else {
                 System.out.print("Select a valid option!" + NewLine);
             }
         }
     }
 
+    @Override
+    protected void initRequestedPath() {
+        requestedPath.add("welcome");
+        requestedPath.add("main menu");
+    }
 }

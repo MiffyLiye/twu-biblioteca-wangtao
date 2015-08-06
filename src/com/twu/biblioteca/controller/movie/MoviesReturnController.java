@@ -4,14 +4,6 @@ import com.twu.biblioteca.controller.BaseController;
 import com.twu.biblioteca.service.MovieService;
 
 public class MoviesReturnController extends BaseController {
-    private MovieService movieService;
-
-    @Override
-    protected void init_requested_path() {
-        requested_path.add("welcome");
-        requested_path.add("return movies");
-    }
-
     public MoviesReturnController() {
         super();
     }
@@ -32,6 +24,14 @@ public class MoviesReturnController extends BaseController {
         else if (path.size() == 3 && path.get(2).equals("unsuccessful")) {
             movieReturnUnsuccessfulView();
         }
+    }
+
+    private MovieService movieService;
+
+    @Override
+    protected void initRequestedPath() {
+        requestedPath.add("welcome");
+        requestedPath.add("return movies");
     }
 
     private void movieReturnView() {

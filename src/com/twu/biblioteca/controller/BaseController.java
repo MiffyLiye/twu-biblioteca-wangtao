@@ -5,22 +5,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public abstract class BaseController {
+public abstract class BaseController implements IHaveSession {
     protected String NewLine;
     protected List<String> path;
-    protected List<String> requested_path;
+    protected List<String> requestedPath;
     protected Scanner scanner;
+    protected Map<String, Object> session;
 
-    protected abstract void init_requested_path();
+    protected abstract void initRequestedPath();
 
     public BaseController() {
         this.NewLine = System.getProperty("line.separator");
 
         path = new LinkedList<String>();
-        requested_path = new LinkedList<String>();
-        init_requested_path();
+        requestedPath = new LinkedList<String>();
+        initRequestedPath();
 
         scanner = new Scanner(System.in);
+    }
+
+    @Override
+    public Map<String, Object> getSession() {
+        return session;
+    }
+
+    @Override
+    public void setSession(Map<String, Object> session) {
+        this.session = session;
     }
 
     public List<String> getPath() {
@@ -31,12 +42,12 @@ public abstract class BaseController {
         this.path = path;
     }
 
-    public List<String> getRequested_path() {
-        return requested_path;
+    public List<String> getRequestedPath() {
+        return requestedPath;
     }
 
-    public void setRequested_path(List<String> requested_path) {
-        this.requested_path = requested_path;
+    public void setRequestedPath(List<String> requestedPath) {
+        this.requestedPath = requestedPath;
     }
 
     public Scanner getScanner() {
@@ -47,9 +58,9 @@ public abstract class BaseController {
         this.scanner = scanner;
     }
 
-    public boolean matchPath() {
-        for (int i = 0; i < requested_path.size(); i++) {
-            if (path.size() > i && path.get(i).equals(requested_path.get(i))) {
+    public boolean pathMatched() {
+        for (int i = 0; i < requestedPath.size(); i++) {
+            if (path.size() > i && path.get(i).equals(requestedPath.get(i))) {
                 continue;
             }
             else {

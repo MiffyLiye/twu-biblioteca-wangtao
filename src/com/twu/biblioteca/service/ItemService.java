@@ -1,17 +1,23 @@
 package com.twu.biblioteca.service;
 
-import com.twu.biblioteca.item.IHaveID;
+import com.twu.biblioteca.controller.IHaveSession;
+import com.twu.biblioteca.entity.IHaveID;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class ItemService<Item> {
     private List<Item> available_items;
     private List<Item> checkouted_items;
+    private String library_number;
+    private Map<Integer, String> checkout_item_user_library_number;
 
     public ItemService() {
         this.available_items = new LinkedList<Item>();
         this.checkouted_items = new LinkedList<Item>();
+        this.checkout_item_user_library_number = new TreeMap<Integer, String>();
     }
 
     public List<Item> getAvailableItems() {
@@ -58,12 +64,20 @@ public class ItemService<Item> {
             if (checkouted == null) {
                 available_items.remove(item);
                 checkouted_items.add(item);
+                checkout_item_user_library_number.put(id, this.library_number);
                 return true;
             }
             else {
                 return false;
             }
         }
+    }
+
+    public boolean checkout(Integer id, String number) {
+        this.library_number = number;
+        boolean result = checkout(id);
+        this.library_number = null;
+        return result;
     }
 
     public boolean checkin(Integer id) {
@@ -76,6 +90,7 @@ public class ItemService<Item> {
             if (returned == null) {
                 checkouted_items.remove(item);
                 available_items.add(item);
+                checkout_item_user_library_number.remove(id);
                 return true;
             }
             else {
