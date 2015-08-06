@@ -1,8 +1,5 @@
 package com.twu.biblioteca.item;
 
-/**
- * Created by MiffyLiye on 05/08/2015.
- */
 public class Movie implements Comparable<Movie>, IHaveID{
     private Integer id;
     private String name;

@@ -4,9 +4,6 @@ import com.twu.biblioteca.item.Movie;
 
 import java.util.List;
 
-/**
- * Created by MiffyLiye on 05/08/2015.
- */
 public class MovieService extends ItemService<Movie> {
     public MovieService() {
         super();

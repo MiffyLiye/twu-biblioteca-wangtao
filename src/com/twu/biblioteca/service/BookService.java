@@ -4,9 +4,6 @@ import com.twu.biblioteca.item.Book;
 
 import java.util.*;
 
-/**
- * Created by MiffyLiye on 02/08/2015.
- */
 public class BookService extends ItemService<Book> {
 
     public BookService() {

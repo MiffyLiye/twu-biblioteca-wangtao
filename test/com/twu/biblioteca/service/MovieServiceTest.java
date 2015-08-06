@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.service;
 
 import com.twu.biblioteca.item.Movie;
 import com.twu.biblioteca.service.MovieService;

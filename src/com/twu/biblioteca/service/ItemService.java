@@ -5,16 +5,11 @@ import com.twu.biblioteca.item.IHaveID;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by MiffyLiye on 06/08/2015.
- */
 public class ItemService<Item> {
-    private String NewLine;
     private List<Item> available_items;
     private List<Item> checkouted_items;
 
     public ItemService() {
-        this.NewLine = System.getProperty("line.separator");
         this.available_items = new LinkedList<Item>();
         this.checkouted_items = new LinkedList<Item>();
     }
