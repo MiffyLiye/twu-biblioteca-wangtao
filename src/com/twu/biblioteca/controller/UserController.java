@@ -3,8 +3,6 @@ package com.twu.biblioteca.controller;
 import com.twu.biblioteca.entity.User;
 import com.twu.biblioteca.service.UserService;
 
-import java.util.Map;
-
 public class UserController extends BaseController {
     private UserService userService;
 

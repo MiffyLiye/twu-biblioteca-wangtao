@@ -14,12 +14,10 @@ import static org.junit.Assert.*;
  */
 public class MovieServiceTest {
     private MovieService movieService;
-    private String NewLine;
     private String library_number;
 
     @Before
     public void SetUp() {
-        NewLine = System.getProperty("line.separator");
         library_number = "000-0001";
 
         movieService = new MovieService();
