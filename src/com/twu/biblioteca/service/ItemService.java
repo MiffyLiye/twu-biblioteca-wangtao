@@ -11,7 +11,6 @@ import java.util.TreeMap;
 public class ItemService<Item> {
     private List<Item> available_items;
     private List<Item> checkouted_items;
-    private String library_number;
     private Map<Integer, String> checkout_item_user_library_number;
 
     public ItemService() {
@@ -54,7 +53,7 @@ public class ItemService<Item> {
         return null;
     }
 
-    public boolean checkout(Integer id) {
+    public boolean checkout(Integer id, String library_number) {
         Item item = findAvailableItemById(id);
         if (item == null) {
             return false;
@@ -64,20 +63,13 @@ public class ItemService<Item> {
             if (checkouted == null) {
                 available_items.remove(item);
                 checkouted_items.add(item);
-                checkout_item_user_library_number.put(id, this.library_number);
+                checkout_item_user_library_number.put(id, library_number);
                 return true;
             }
             else {
                 return false;
             }
         }
-    }
-
-    public boolean checkout(Integer id, String number) {
-        this.library_number = number;
-        boolean result = checkout(id);
-        this.library_number = null;
-        return result;
     }
 
     public boolean checkin(Integer id) {

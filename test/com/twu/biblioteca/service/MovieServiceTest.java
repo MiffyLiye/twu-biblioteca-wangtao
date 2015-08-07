@@ -15,10 +15,12 @@ import static org.junit.Assert.*;
 public class MovieServiceTest {
     private MovieService movieService;
     private String NewLine;
+    private String library_number;
 
     @Before
     public void SetUp() {
         NewLine = System.getProperty("line.separator");
+        library_number = "000-0001";
 
         movieService = new MovieService();
         List<Movie> available_movies = new LinkedList<Movie>();
@@ -47,28 +49,28 @@ public class MovieServiceTest {
 
     @Test
     public void should_successful_checkout_movie_if_it_is_available() {
-        boolean actual = movieService.checkout(1);
+        boolean actual = movieService.checkout(1, this.library_number);
         assertEquals(true, actual);
     }
 
     @Test
     public void should_not_list_checkouted_movie_on_movies_list() {
-        movieService.checkout(1);
+        movieService.checkout(1, this.library_number);
 
         assertEquals(1, movieService.getAvailableItems().size());
     }
 
     @Test
     public void should_unsuccessful_checkout_movie_if_it_is_unavailable() {
-        movieService.checkout(1);
-        assertEquals(false, movieService.checkout(1));
+        movieService.checkout(1, this.library_number);
+        assertEquals(false, movieService.checkout(1, this.library_number));
 
-        assertEquals(false, movieService.checkout(-1));
+        assertEquals(false, movieService.checkout(-1, this.library_number));
     }
 
     @Test
     public void should_successful_return_movie_if_it_is_checkouted() {
-        movieService.checkout(1);
+        movieService.checkout(1, this.library_number);
         assertTrue(movieService.checkin(1));
 
         assertEquals(2, movieService.getAvailableItems().size());

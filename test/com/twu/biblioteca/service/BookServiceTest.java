@@ -15,10 +15,12 @@ import static org.junit.Assert.*;
 public class BookServiceTest {
     private BookService bookService;
     private String NewLine;
+    private String library_number;
 
     @Before
     public void SetUp() {
         NewLine = System.getProperty("line.separator");
+        library_number = "000-0001";
 
         bookService = new BookService();
         List<Book> available_books = new LinkedList<Book>();
@@ -47,26 +49,26 @@ public class BookServiceTest {
 
     @Test
     public void should_successful_checkout_book_if_it_is_available() {
-        assertTrue(bookService.checkout(1));
+        assertTrue(bookService.checkout(1, this.library_number));
     }
 
     @Test
     public void should_not_list_checkouted_book_on_books_list() {
-        bookService.checkout(1);
+        bookService.checkout(1, this.library_number);
         assertEquals(1, bookService.getAvailableItems().size());
     }
 
     @Test
     public void should_unsuccessful_checkout_book_if_it_is_unavailable() {
-        bookService.checkout(1);
-        assertEquals(false, bookService.checkout(1));
+        bookService.checkout(1, this.library_number);
+        assertEquals(false, bookService.checkout(1, this.library_number));
 
-        assertEquals(false, bookService.checkout(-1));
+        assertEquals(false, bookService.checkout(-1, this.library_number));
     }
 
     @Test
     public void should_successful_return_book_if_it_is_checkouted() {
-        bookService.checkout(1);
+        bookService.checkout(1, this.library_number);
         assertEquals(true, bookService.checkin(1));
 
         assertEquals(2, bookService.getAvailableItems().size());
