@@ -1,15 +1,9 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.controller.*;
-import com.twu.biblioteca.controller.book.BooksCheckoutController;
-import com.twu.biblioteca.controller.book.BooksQueryController;
-import com.twu.biblioteca.controller.book.BooksReturnController;
-import com.twu.biblioteca.controller.movie.MoviesReturnController;
-import com.twu.biblioteca.controller.movie.MoviesCheckoutController;
-import com.twu.biblioteca.controller.movie.MoviesQueryController;
-import com.twu.biblioteca.service.BookService;
-import com.twu.biblioteca.service.MovieService;
-import com.twu.biblioteca.service.UserService;
+import com.twu.biblioteca.controller.book.*;
+import com.twu.biblioteca.controller.movie.*;
+import com.twu.biblioteca.service.*;
 
 import java.util.*;
 

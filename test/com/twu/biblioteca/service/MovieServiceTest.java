@@ -9,9 +9,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by MiffyLiye on 05/08/2015.
- */
 public class MovieServiceTest {
     private MovieService movieService;
     private String library_number;

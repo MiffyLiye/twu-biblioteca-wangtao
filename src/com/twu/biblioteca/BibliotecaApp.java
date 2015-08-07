@@ -1,8 +1,6 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.service.BookService;
-import com.twu.biblioteca.service.MovieService;
-import com.twu.biblioteca.service.UserService;
+import com.twu.biblioteca.service.*;
 
 public class BibliotecaApp {
     public static void main(String[] args) {

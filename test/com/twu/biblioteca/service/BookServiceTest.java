@@ -9,9 +9,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by MiffyLiye on 02/08/2015.
- */
 public class BookServiceTest {
     private BookService bookService;
     private String library_number;
