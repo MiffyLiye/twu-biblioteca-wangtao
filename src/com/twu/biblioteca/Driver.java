@@ -67,7 +67,7 @@ public class Driver implements IHaveSession {
                 }
                 if (!matched) {
                     System.out.println("Something happened.");
-                    path = new LinkedList<String>();
+                    break;
                 }
             }
         }
