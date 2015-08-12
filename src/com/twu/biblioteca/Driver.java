@@ -53,22 +53,16 @@ public class Driver implements IHaveSession {
     public void run() {
         path.add("welcome");
         while (true) {
-            if (path.size() == 0) {
-                break;
-            }
-            else {
-                boolean matched = false;
-                for (BaseController controller : controllers) {
-                    if (controller.pathMatched()) {
-                        controller.runView();
-                        matched = true;
-                        break;
-                    }
-                }
-                if (!matched) {
-                    System.out.println("Something happened.");
+            boolean matched = false;
+            for (BaseController controller : controllers) {
+                if (controller.pathMatched()) {
+                    controller.runView();
+                    matched = true;
                     break;
                 }
+            }
+            if (!matched) {
+                break;
             }
         }
     }
